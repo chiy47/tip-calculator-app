@@ -1,0 +1,53 @@
+:root {
+  --strong-cyan: hsl(172, 67%, 45%);
+  --very-dark-cyan: hsl(183, 100%, 15%);
+  --dark-grayish-cyan: hsl(186, 14%, 43%);
+  --dark-grayish-cyan-2: hsl(184, 14%, 56%);
+  --light-grayish-cyan: hsl(185, 41%, 84%);
+  --light-grayish-cyan-2: hsl(189, 41%, 97%);
+  --white: hsl(0, 0%, 100%);
+  --font-family: 'Space Mono', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  font-family: var(--font-family);
+  background-color: hsl(209, 100%, 90%);
+}
+
+header {
+  padding: 3rem;
+  text-align: center;
+}
+
+.tip-calculator {
+  background-color: var(--white);
+  padding: 1rem;
+  border-radius: 25px;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+input[type='number'] {
+  font-size: 24px;
+}
+
+.output {
+  background-color: var(--very-dark-cyan);
+  border-radius: 16px;
+  padding: 2rem 1rem 1rem;
+  color: var(--white);
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
