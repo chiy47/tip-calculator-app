@@ -23,7 +23,6 @@
     <title>Frontend Mentor | Tip calculator app</title>
   </head>
   <body>
-    <div class="container">
       <header>
         <img src="./images/logo.svg" alt="logo" />
       </header>
@@ -32,52 +31,51 @@
         <div class="input">
           <div class="bill-container">
             <div class="label-wrapper">
-              <label for="bill">Bill</label>
+              <label for="bill">
+                <h4>Bill</h4>
+                <h4 class="bill-error error-mssg">Can't be less than zero</h4>
+              </label>
             </div>
             <div class="input-wrapper">
-              <img src="./images/icon-dollar.svg" alt="dollar-icon" />
               <input
-                class="input-text"
-                type="number"
+                class="input-bill"
+                type="text"
                 name="input-bill"
                 id="input-bill"
-                placeholder="0.0"
+                placeholder="0"
               />
             </div>
           </div>
           <div class="tip-container">
             <div class="label-wrapper">
-              <label for="tip">Select Tip %</label>
+              <label for="tip"><h4>Select Tip %</h4></label>
             </div>
-            <class="btn-wrapper">
-              <input type="radio" name="input-tip" id="tip5" class="btn tip" value="5" />
-              <label for="tip5">5%</label>
-              <input type="radio" name="input-tip" id="tip10" class="btn tip" value="10" />
-              <label for="tip10">10%</label>
-              <input type="radio" name="input-tip" id="tip15" class="btn tip" value="15" />
-              <label for="tip15">15%</label>
-              <input type="radio" name="input-tip" id="tip25" class="btn tip" value="25" />
-              <label for="tip25">25%</label>
-              <input type="radio" name="input-tip" id="tip50" class="btn tip" value="50" />
-              <label for="tip50">50%</label>
+            <div class="tips-wrapper">
+              <button type="number" name="input-tip" id="tip5" class="btn tip unselected" value="5">5%</button>
+              <button type="number" name="input-tip" id="tip10" class="btn tip unselected" value="10">10%</button>
+              <button type="number" name="input-tip" id="tip15" class="btn tip unselected" value="15">15%</button>
+              <button type="number" name="input-tip" id="tip25" class="btn tip unselected" value="25">25%</button>
+              <button type="number" name="input-tip" id="tip50" class="btn tip unselected" value="50">50%</button>
               <input
-                class="input-text"
+                class="input-custom"
                 type="text"
                 name="input-tip-custom"
                 id="input-tip-custom"
-                placeholder="custom"
+                placeholder="Custom"
               />
             </div>
           </div>
           <div class="people-container">
             <div class="label-wrapper">
-              <label for="people">Number of People</label>
+              <label for="people">
+                <h4>Number of People</h4>
+                <h4 class="people-error error-mssg">Can't be Zero</h4>
+              </label>
             </div>
             <div class="input-wrapper">
-              <img src="./images/icon-person.svg" alt="person-icon" />
               <input
-                class="input-text"
-                type="number"
+                class="input-people"
+                type="text"
                 name="input-people"
                 id="input-people"
                 placeholder="0"
@@ -86,27 +84,28 @@
               />
             </div>
           </div>
+
           <div class="output">
           <div class="output-wrapper">
             <div class="output-row">
               <div class="title-wrapper">
-                <div class="title">Tip Amount</div>
-                <div class="desc">/ person</div>
+                <div class="title"><h4>Tip Amount</h4></div>
+                <div class="desc"><h5>/ person</h5></div>
               </div>
-              <div class="output-value" id="tip-per-person">$0.0</div>
+              <div class="output-value" id="tip-per-person">$0.00</div>
             </div>
             <div class="output-row">
               <div class="title-wrapper">
-                <div class="title">Total</div>
-                <div class="desc">/ person</div>
+                <div class="title"><h4>Total</h4></div>
+                <div class="desc"><h5>/ person</h5></div>
               </div>
-              <div class="output-value" id="total-per-person">$0.0</div>
+              <div class="output-value" id="total-per-person">$0.00</div>
             </div>
           </div>
-          <button class="btn reset" onclick="resetValues()">Reset</button>
+          <button class="btn reset disable" onclick="resetValues()">Reset</button>
         </div>
         </div>
-        </div>
+        
     </div>
     <div class="attribution">
       Challenge by
@@ -114,7 +113,6 @@
         >Frontend Mentor</a
       >. Coded by
       <a href="https://www.chiquynhduong.com/" target="_blank">Chi Duong</a>.
-    </div>
   </body>
   <script src="./app.js"></script>
 </html>

@@ -2,11 +2,11 @@ const tipPerPerson = document.querySelector('#tip-per-person')
 const totalPerPerson = document.querySelector('#total-per-person')
 const customTip = document.querySelector('#input-tip-custom')
 const tipsOptions = document.querySelectorAll('.tip')
-const tipsSelector = document.querySelector('.people-container')
 const billAmount = document.querySelector('#input-bill')
 const numOfPeople = document.querySelector('#input-people')
-const resetBtn = document.querySelector('button')
-const tip15 = document.querySelector('#tip15')
+const resetBtn = document.querySelector('.reset')
+const billErr = document.querySelector('.bill-error')
+const pplErr = document.querySelector('.people-error')
 
 var bill = 0,
   tip = 0,
@@ -15,13 +15,32 @@ var bill = 0,
 billAmount.addEventListener('input', (e) => {
   const { value } = e.target
   bill = parseFloat(value)
-  calculateTip()
+  if (bill <= 0) {
+    billAmount.classList.add('error')
+    billErr.style.visibility = 'visible'
+    return
+  } else {
+    billAmount.classList.remove('error')
+    billErr.style.visibility = 'hidden'
+    calculateTip()
+  }
 })
 
 tipsOptions.forEach((tipsOption) => {
   tipsOption.addEventListener('click', () => {
     resetCustomTip()
-    tip = parseFloat(tipsOption.value)
+    if (tipsOption.classList.contains('selected')) {
+      tip = 0
+      tipsOption.classList.remove('selected')
+      tipsOption.classList.add('unselected')
+    } else {
+      tip = tipsOption.value
+      tipsOptions.forEach((tipsOption) =>
+        tipsOption.classList.remove('selected')
+      )
+      tipsOption.classList.remove('unselected')
+      tipsOption.classList.add('selected')
+    }
     calculateTip()
   })
 })
@@ -39,49 +58,47 @@ const resetCustomTip = () => {
   customTip.value = ''
 }
 
-const resetTipOptions = () => {
+const resetTipsOptions = () => {
   tipsOptions.forEach((tipsOption) => {
     tipsOption.checked = false
+    tipsOption.classList.remove('selected')
   })
 }
 
 numOfPeople.addEventListener('input', (e) => {
   const { value } = e.target
   people = parseFloat(value)
-  if (!people || people === 0) {
-    setError()
+  if (people <= 0) {
+    numOfPeople.classList.add('error')
+    pplErr.style.visibility = 'visible'
     return
+  } else {
+    numOfPeople.classList.remove('error')
+    pplErr.style.visibility = 'hidden'
+    calculateTip()
   }
-  calculateTip()
 })
 
 const calculateTip = () => {
   enableResetButton()
-  if (!people || people === 0) {
-    setError()
-    return
+  if (bill >= 0 && people >= 1) {
+    const tipAmount = bill * (tip / 100)
+    const finalAmountPerPerson = (bill + tipAmount) / people
+    const finalTipPerPerson = tipAmount / people
+    setValues(finalTipPerPerson, finalAmountPerPerson)
   }
-  removeError()
-  const tipAmount = bill * (tip / 100)
-  const finalAmountPerPerson = (bill + tipAmount) / people
-  const finalTipPerPerson = tipAmount / people
-  setValues(finalTipPerPerson, finalAmountPerPerson)
 }
 
 const disableResetButton = () => {
   resetBtn.disabled = true
+  resetBtn.classList.remove('enable')
+  resetBtn.classList.add('disable')
 }
 
 const enableResetButton = () => {
   resetBtn.disabled = false
-}
-
-const setError = () => {
-  tipsSelector.classList.add('error')
-}
-
-const removeError = () => {
-  tipsSelector.classList.remove('error')
+  resetBtn.classList.remove('disable')
+  resetBtn.classList.add('enable')
 }
 
 const setValues = (tip, bill) => {
@@ -90,17 +107,19 @@ const setValues = (tip, bill) => {
 }
 
 const resetValues = () => {
-  tip = 15
+  tip = 0
   people = 0
   bill = 0
   setValues(0, 0)
   billAmount.value = ''
   numOfPeople.value = ''
   resetCustomTip()
-  resetTipOptions()
-  tip15.checked = true
-  removeError()
+  resetTipsOptions()
+  tipsOptions.forEach((tipsOption) => {
+    tipsOption.classList.remove('selected')
+    tipsOption.classList.add('unselected')
+  })
   disableResetButton()
 }
 
-resetValues()
+resetBtn.addEventListener('click', resetValues)
