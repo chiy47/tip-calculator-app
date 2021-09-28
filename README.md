@@ -1,3 +1,6 @@
+View Finished Site: https://chiy47.github.io/tip-calculator-app/
+
+
 # Frontend Mentor - Tip calculator app
 
 ![Design preview for the Tip calculator app coding challenge](./design/desktop-preview.jpg)
